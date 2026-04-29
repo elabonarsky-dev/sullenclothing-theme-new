@@ -1,0 +1,15 @@
+<div class="mega-menu" data-mega-panel="{{ handle }}" hidden>
+  <div class="container mega-menu__grid">
+    {%- assign menu_handle = 'mega-' | append: handle -%}
+    {%- for parent in linklists[menu_handle].links -%}
+      <div class="mega-menu__col">
+        <h4>{{ parent.title }}</h4>
+        <ul>
+          {%- for child in parent.links -%}
+            <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>

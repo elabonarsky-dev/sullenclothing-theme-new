@@ -1,0 +1,8 @@
+<div class="announcement-bar" role="region" aria-label="Announcement">
+  <div class="container">
+    <p class="announcement-bar__message">{{ section.settings.message }}</p>
+  </div>
+</div>
+{% schema %}
+{"name":"Announcement bar","settings":[{"type":"text","id":"message","label":"Message","default":"Free U.S. shipping on orders over $75"}]}
+{% endschema %}

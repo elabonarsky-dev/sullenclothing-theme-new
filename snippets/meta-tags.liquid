@@ -1,0 +1,13 @@
+{%- if template.name == 'product' -%}
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="{{ product.title | escape }}">
+  <meta property="og:description" content="{{ product.description | strip_html | truncate: 160 | escape }}">
+  <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200 }}">
+  <meta property="product:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  <meta property="product:price:currency" content="{{ shop.currency }}">
+  <script type="application/ld+json">{"@context":"https://schema.org/","@type":"Product","name":{{ product.title | json }},"image":{{ product.featured_image | image_url: width: 1200 | json }},"description":{{ product.description | strip_html | json }},"sku":{{ product.selected_or_first_available_variant.sku | json }},"brand":{"@type":"Brand","name":{{ shop.name | json }}},"offers":{"@type":"Offer","priceCurrency":{{ shop.currency | json }},"price":{{ product.price | divided_by: 100.0 | json }},"availability":"https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"}}</script>
+{%- else -%}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  {%- if page_description -%}<meta property="og:description" content="{{ page_description | escape }}">{%- endif -%}
+{%- endif -%}

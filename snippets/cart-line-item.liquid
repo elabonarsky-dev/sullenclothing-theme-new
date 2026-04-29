@@ -1,0 +1,20 @@
+<div class="cart-line" data-line-key="{{ line.key }}" data-line-index="{{ index }}">
+  <a href="{{ line.url }}" class="cart-line__media">
+    <img src="{{ line.image | image_url: width: 160 }}" alt="{{ line.product.title | escape }}" width="80" height="80">
+  </a>
+  <div class="cart-line__body">
+    <a href="{{ line.url }}" class="cart-line__title">{{ line.product.title }}</a>
+    {%- unless line.product.has_only_default_variant -%}
+      <p class="cart-line__variant">{{ line.variant.title }}</p>
+    {%- endunless -%}
+    <div class="cart-line__qty">
+      <button type="button" data-qty-down aria-label="Decrease">{% render 'icon-minus' %}</button>
+      <input type="number" name="updates[]" value="{{ line.quantity }}" min="0" data-qty-input aria-label="Quantity">
+      <button type="button" data-qty-up aria-label="Increase">{% render 'icon-plus' %}</button>
+    </div>
+  </div>
+  <div class="cart-line__right">
+    <p class="cart-line__price">{{ line.final_line_price | money }}</p>
+    <button type="button" class="cart-line__remove" data-line-remove aria-label="Remove">{% render 'icon-trash-2' %}</button>
+  </div>
+</div>

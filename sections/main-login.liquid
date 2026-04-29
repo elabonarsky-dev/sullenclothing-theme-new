@@ -1,0 +1,12 @@
+<section class="auth container">
+  <h1 class="display">{{ 'customer.login.title' | t }}</h1>
+  {% form 'customer_login', class: 'auth__form' %}
+    {{ form.errors | default_errors }}
+    <label>{{ 'customer.login.email' | t }}<input type="email" name="customer[email]" required autocomplete="email"></label>
+    <label>{{ 'customer.login.password' | t }}<input type="password" name="customer[password]" required autocomplete="current-password"></label>
+    <button type="submit" class="btn btn--primary">{{ 'customer.login.submit' | t }}</button>
+    <a href="{{ routes.account_recover_url }}">{{ 'customer.login.forgot' | t }}</a>
+    <a href="{{ routes.account_register_url }}">{{ 'customer.login.new' | t }}</a>
+  {% endform %}
+</section>
+{% schema %}{"name":"Login","settings":[]}{% endschema %}

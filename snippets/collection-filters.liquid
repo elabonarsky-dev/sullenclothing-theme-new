@@ -1,0 +1,29 @@
+<aside class="collection-filters">
+  <form data-filters>
+    {%- for filter in collection.filters -%}
+      <details class="collection-filters__group" open>
+        <summary>{{ filter.label }}</summary>
+        <ul>
+          {%- case filter.type -%}
+            {%- when 'list' -%}
+              {%- for value in filter.values -%}
+                <li>
+                  <label>
+                    <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                    {{ value.label }} <span class="muted">({{ value.count }})</span>
+                  </label>
+                </li>
+              {%- endfor -%}
+            {%- when 'price_range' -%}
+              <li>
+                <label>Min<input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value }}" min="0"></label>
+                <label>Max<input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value }}" min="0"></label>
+              </li>
+          {%- endcase -%}
+        </ul>
+      </details>
+    {%- endfor -%}
+    <button type="submit" class="btn btn--ghost">Apply</button>
+    <a href="{{ collection.url }}" class="btn btn--text">Clear</a>
+  </form>
+</aside>

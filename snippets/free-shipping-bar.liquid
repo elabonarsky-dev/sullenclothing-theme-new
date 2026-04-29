@@ -1,0 +1,10 @@
+{%- assign threshold_cents = settings.free_ship_threshold | times: 100 -%}
+{%- assign remaining = threshold_cents | minus: cart.total_price -%}
+<div class="free-ship-bar" data-free-ship data-threshold="{{ threshold_cents }}">
+  {%- if remaining > 0 -%}
+    <p>Add <strong>{{ remaining | money }}</strong> for free shipping</p>
+  {%- else -%}
+    <p>🎉 You unlocked free shipping</p>
+  {%- endif -%}
+  <progress max="{{ threshold_cents }}" value="{{ cart.total_price | at_most: threshold_cents }}"></progress>
+</div>

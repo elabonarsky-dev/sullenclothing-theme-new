@@ -1,0 +1,43 @@
+<section class="collection-page">
+  <div class="container">
+    {% render 'breadcrumbs' %}
+    <header class="collection-page__header">
+      <h1 class="display">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}<div class="collection-page__desc rte">{{ collection.description }}</div>{%- endif -%}
+    </header>
+    <div class="collection-page__layout">
+      {% render 'collection-filters', collection: collection %}
+      <div class="collection-page__main">
+        <div class="collection-page__toolbar">
+          <span class="collection-page__count">{{ collection.products_count }} products</span>
+          <label class="collection-page__sort">
+            <span>{{ 'collections.general.sort_by' | t }}</span>
+            <select data-sort onchange="window.location.search='?sort_by='+this.value">
+              {%- assign opts = 'manual,best-selling,title-ascending,title-descending,price-ascending,price-descending,created-descending' | split: ',' -%}
+              {%- for opt in opts -%}
+                <option value="{{ opt }}" {% if collection.sort_by == opt %}selected{% endif %}>{{ opt | replace: '-',' ' | capitalize }}</option>
+              {%- endfor -%}
+            </select>
+          </label>
+        </div>
+        {%- paginate collection.products by 24 -%}
+          <div class="product-grid">
+            {%- for product in collection.products -%}
+              {% render 'product-card', product: product %}
+            {%- else -%}
+              <p>No products found.</p>
+            {%- endfor -%}
+          </div>
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="Pagination">
+              {{ paginate | default_pagination }}
+            </nav>
+          {%- endif -%}
+        {%- endpaginate -%}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{"name":"Collection","settings":[],"presets":[{"name":"Collection"}]}
+{% endschema %}

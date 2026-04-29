@@ -1,0 +1,10 @@
+<sticky-atc class="sticky-atc" hidden>
+  <div class="container sticky-atc__inner">
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 80 }}" alt="" width="40" height="40" loading="lazy">
+    {%- endif -%}
+    <div class="sticky-atc__title">{{ product.title }}</div>
+    <div class="sticky-atc__price" data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</div>
+    <button type="button" class="btn btn--primary" data-sticky-atc-buy>{{ 'products.product.add_to_cart' | t }}</button>
+  </div>
+</sticky-atc>

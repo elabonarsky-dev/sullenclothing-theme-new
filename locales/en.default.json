@@ -1,0 +1,9 @@
+{
+  "general":{"search":{"placeholder":"Search products, artists…","title":"Search","no_results":"No results for \"{{ terms }}\""},
+    "newsletter":{"label":"Email","button":"Sign up","success":"Welcome to the family. Check your inbox for 15% off."},
+    "cart":{"title":"Your Bag","empty":"Your bag is empty","subtotal":"Subtotal","checkout":"Checkout","remove":"Remove","quantity":"Quantity"},
+    "accessibility":{"close":"Close","menu":"Menu","previous":"Previous","next":"Next"}},
+  "products":{"product":{"add_to_cart":"Add to bag","sold_out":"Sold out","unavailable":"Unavailable","price_from":"From {{ price }}","sale":"Sale","quantity":"Quantity","size_chart":"Size chart","artist":"Artist","share":"Share"}},
+  "collections":{"general":{"sort_by":"Sort by","filter":"Filter","clear":"Clear","results":"{{ count }} products"}},
+  "customer":{"login":{"title":"Sign in","email":"Email","password":"Password","submit":"Sign in","forgot":"Forgot password?","new":"Create account"},"register":{"title":"Create account","first_name":"First name","last_name":"Last name","submit":"Create"},"account":{"title":"Account","orders":"Orders","addresses":"Addresses","logout":"Sign out"}}
+}

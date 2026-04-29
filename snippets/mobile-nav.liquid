@@ -1,0 +1,31 @@
+<mobile-nav class="mobile-nav" hidden>
+  <div class="mobile-nav__overlay" data-mobile-nav-close></div>
+  <aside class="mobile-nav__panel" role="dialog" aria-label="Menu">
+    <header class="mobile-nav__head">
+      <button type="button" data-mobile-nav-close aria-label="Close">{% render 'icon-close' %}</button>
+    </header>
+    <nav class="mobile-nav__body" data-mobile-nav-body>
+      <ul class="mobile-nav__list" data-level="0">
+        {%- for link in linklists['main-menu'].links -%}
+          <li>
+            {%- if link.links.size > 0 -%}
+              <button type="button" data-mobile-nav-into="{{ link.handle }}">{{ link.title }} {% render 'icon-chevron-right' %}</button>
+            {%- else -%}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- for link in linklists['main-menu'].links -%}
+        {%- if link.links.size > 0 -%}
+          <ul class="mobile-nav__list" data-level="1" data-mobile-nav-panel="{{ link.handle }}" hidden>
+            <li><button type="button" data-mobile-nav-back>{% render 'icon-chevron-left' %} {{ link.title }}</button></li>
+            {%- for child in link.links -%}
+              <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </aside>
+</mobile-nav>

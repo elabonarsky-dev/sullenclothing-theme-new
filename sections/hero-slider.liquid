@@ -1,0 +1,47 @@
+<hero-slider class="hero-slider" data-autoplay="{{ section.settings.autoplay }}" data-interval="{{ section.settings.interval }}">
+  <div class="hero-slider__track" data-hero-track>
+    {%- for block in section.blocks -%}
+      <div class="hero-slider__slide" data-hero-slide {{ block.shopify_attributes }}>
+        {%- if block.settings.video != blank -%}
+          <video class="hero-slider__media" autoplay muted loop playsinline poster="{{ block.settings.image | image_url: width: 1920 }}">
+            <source src="{{ block.settings.video }}" type="video/mp4">
+          </video>
+        {%- elsif block.settings.image != blank -%}
+          <img class="hero-slider__media" src="{{ block.settings.image | image_url: width: 1920 }}" alt="{{ block.settings.heading | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" {% if forloop.first %}fetchpriority="high"{% endif %} width="1920" height="1080">
+        {%- endif -%}
+        <div class="hero-slider__overlay"></div>
+        <div class="hero-slider__content container">
+          {%- if block.settings.eyebrow != blank -%}<p class="hero-slider__eyebrow">{{ block.settings.eyebrow }}</p>{%- endif -%}
+          <h1 class="hero-slider__heading display">{{ block.settings.heading }}</h1>
+          {%- if block.settings.subheading != blank -%}<p class="hero-slider__sub">{{ block.settings.subheading }}</p>{%- endif -%}
+          {%- if block.settings.cta_label != blank and block.settings.cta_url != blank -%}
+            <a href="{{ block.settings.cta_url }}" class="btn btn--primary">{{ block.settings.cta_label }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <button type="button" class="hero-slider__nav hero-slider__nav--prev" data-hero-prev aria-label="Previous">{% render 'icon-chevron-left' %}</button>
+    <button type="button" class="hero-slider__nav hero-slider__nav--next" data-hero-next aria-label="Next">{% render 'icon-chevron-right' %}</button>
+    <div class="hero-slider__dots" data-hero-dots>
+      {%- for block in section.blocks -%}
+        <button type="button" data-hero-dot="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</hero-slider>
+{% schema %}
+{"name":"Hero slider","max_blocks":6,"settings":[
+  {"type":"checkbox","id":"autoplay","label":"Autoplay","default":true},
+  {"type":"range","id":"interval","label":"Interval (s)","min":3,"max":12,"step":1,"default":6}
+],"blocks":[{"type":"slide","name":"Slide","settings":[
+  {"type":"image_picker","id":"image","label":"Image"},
+  {"type":"url","id":"video","label":"Video URL (mp4)"},
+  {"type":"text","id":"eyebrow","label":"Eyebrow"},
+  {"type":"text","id":"heading","label":"Heading","default":"Sullen"},
+  {"type":"textarea","id":"subheading","label":"Subheading"},
+  {"type":"text","id":"cta_label","label":"CTA label","default":"Shop"},
+  {"type":"url","id":"cta_url","label":"CTA URL"}
+]}],"presets":[{"name":"Hero slider","blocks":[{"type":"slide"}]}]}
+{% endschema %}

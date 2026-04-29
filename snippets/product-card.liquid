@@ -1,0 +1,25 @@
+{%- assign first_variant = product.selected_or_first_available_variant -%}
+{%- assign artist = product.metafields.sullen.artist_metaobject.value -%}
+<article class="product-card" data-product-handle="{{ product.handle }}">
+  <a href="{{ product.url }}" class="product-card__media">
+    {% render 'responsive-image', image: product.featured_image, sizes: '(min-width: 750px) 25vw, 50vw' %}
+    {%- if product.images[1] -%}
+      <img class="product-card__media-hover" src="{{ product.images[1] | image_url: width: 800 }}" alt="" loading="lazy" width="800" height="800">
+    {%- endif -%}
+    {% render 'product-badges', product: product %}
+    {%- if show_bundle_picker -%}{% render 'bundle-picker', product: product %}{%- endif -%}
+  </a>
+  <div class="product-card__body">
+    {%- if artist -%}<p class="product-card__artist">{{ artist.name }}</p>{%- endif -%}
+    <h3 class="product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="product-card__price">
+      {%- if first_variant.compare_at_price > first_variant.price -%}
+        <span class="product-card__price-sale">{{ first_variant.price | money }}</span>
+        <s>{{ first_variant.compare_at_price | money }}</s>
+      {%- else -%}
+        {{ first_variant.price | money }}
+      {%- endif -%}
+    </div>
+    {% render 'color-swatch', product: product %}
+  </div>
+</article>

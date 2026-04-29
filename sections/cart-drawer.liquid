@@ -1,0 +1,36 @@
+<cart-drawer class="cart-drawer" hidden>
+  <div class="cart-drawer__overlay" data-cart-close></div>
+  <aside class="cart-drawer__panel" role="dialog" aria-label="{{ 'general.cart.title' | t }}">
+    <header class="cart-drawer__head">
+      <h2>{{ 'general.cart.title' | t }}</h2>
+      <button type="button" data-cart-close aria-label="{{ 'general.accessibility.close' | t }}">{% render 'icon-close' %}</button>
+    </header>
+    {%- if settings.enable_free_ship_bar -%}
+      {% render 'free-shipping-bar' %}
+    {%- endif -%}
+    <div class="cart-drawer__body" data-cart-body>
+      {%- if cart.item_count == 0 -%}
+        <p class="cart-drawer__empty">{{ 'general.cart.empty' | t }}</p>
+      {%- else -%}
+        <ul class="cart-drawer__lines">
+          {%- for line in cart.items -%}
+            <li>{% render 'cart-line-item', line: line, index: forloop.index %}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+    <footer class="cart-drawer__foot">
+      <div class="cart-drawer__sub">
+        <span>{{ 'general.cart.subtotal' | t }}</span>
+        <strong data-cart-subtotal>{{ cart.total_price | money }}</strong>
+      </div>
+      <a href="/checkout" class="btn btn--primary btn--checkout" data-cart-checkout>{{ 'general.cart.checkout' | t }}</a>
+    </footer>
+  </aside>
+</cart-drawer>
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}

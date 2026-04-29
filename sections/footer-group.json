@@ -1,0 +1,39 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "menu-shop": {
+          "type": "menu",
+          "settings": {
+            "title": "Shop",
+            "menu": "footer"
+          }
+        },
+        "menu-help": {
+          "type": "menu",
+          "settings": {
+            "title": "Help",
+            "menu": "footer-help"
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Join the family",
+            "body": "15% off your first order"
+          }
+        },
+        "social": {
+          "type": "social",
+          "settings": {}
+        }
+      },
+      "block_order": ["menu-shop", "menu-help", "newsletter", "social"],
+      "settings": {}
+    }
+  },
+  "order": ["footer"]
+}

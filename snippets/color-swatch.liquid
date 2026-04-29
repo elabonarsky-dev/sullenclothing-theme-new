@@ -1,0 +1,13 @@
+{%- assign swatches = product.metafields.sullen.color_swatches.value -%}
+{%- if swatches -%}
+  <div class="color-swatch-row" aria-label="Available colors">
+    {%- for s in swatches limit: 5 -%}
+      {%- if s.image != blank -%}
+        <span class="color-swatch" style="background-image:url({{ s.image | image_url: width: 64 }})" title="{{ s.name }}"></span>
+      {%- else -%}
+        <span class="color-swatch" style="background:{{ s.hex }}" title="{{ s.name }}"></span>
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if swatches.size > 5 -%}<span class="color-swatch__more">+{{ swatches.size | minus: 5 }}</span>{%- endif -%}
+  </div>
+{%- endif -%}

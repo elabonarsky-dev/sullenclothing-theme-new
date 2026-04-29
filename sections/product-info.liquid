@@ -1,0 +1,79 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign artist = product.metafields.sullen.artist_metaobject.value -%}
+<section class="pdp" data-product-id="{{ product.id }}">
+  <div class="container pdp__layout">
+    <div class="pdp__media">
+      {% render 'product-gallery', product: product %}
+    </div>
+    <div class="pdp__details">
+      {% render 'breadcrumbs' %}
+      {%- if artist -%}
+        <a href="/pages/artists/{{ artist.handle }}" class="pdp__artist">
+          {%- if artist.portrait != blank -%}<img src="{{ artist.portrait | image_url: width: 64 }}" width="32" height="32" alt="">{%- endif -%}
+          <span>{{ 'products.product.artist' | t }}: <strong>{{ artist.name }}</strong></span>
+        </a>
+      {%- endif -%}
+      <h1 class="pdp__title display">{{ product.title }}</h1>
+      {% render 'product-badges', product: product %}
+      <div class="pdp__price" data-price>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span class="pdp__price-sale">{{ current_variant.price | money }}</span>
+          <s class="pdp__price-was">{{ current_variant.compare_at_price | money }}</s>
+        {%- else -%}
+          <span>{{ current_variant.price | money }}</span>
+        {%- endif -%}
+      </div>
+      {% render 'product-tier-switcher', product: product %}
+      <product-form data-section="{{ section.id }}">
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" data-product-form>
+          {%- for option in product.options_with_values -%}
+            <div class="pdp__option" data-option-name="{{ option.name | downcase }}">
+              <div class="pdp__option-header">
+                <span class="pdp__option-label">{{ option.name }}: <strong data-option-display>{{ option.selected_value }}</strong></span>
+                {%- if option.name contains 'Size' -%}
+                  <button type="button" class="pdp__sizechart-link" data-sizechart-open>{{ 'products.product.size_chart' | t }}</button>
+                {%- endif -%}
+              </div>
+              <div class="pdp__swatches">
+                {%- for value in option.values -%}
+                  <button type="button" class="pdp__swatch{% if value == option.selected_value %} is-selected{% endif %}" data-option-value="{{ value | escape }}" data-option-position="{{ forloop.index0 }}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+          <select name="id" data-variant-select hidden>
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" data-options="{{ variant.options | join: '|' | escape }}" data-price="{{ variant.price }}" data-compare="{{ variant.compare_at_price }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title }} - {{ variant.price | money }}</option>
+            {%- endfor -%}
+          </select>
+          <div class="pdp__qty">
+            <label for="Qty">{{ 'products.product.quantity' | t }}</label>
+            <input id="Qty" type="number" name="quantity" value="1" min="1">
+          </div>
+          <button type="submit" class="btn btn--primary pdp__atc" data-atc {% unless current_variant.available %}disabled{% endunless %}>
+            <span data-atc-label>{% if current_variant.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+          </button>
+        </form>
+      </product-form>
+      <div class="pdp__benefits">
+        <p>{% render 'icon-truck' %} Free U.S. shipping over $75</p>
+        <p>{% render 'icon-rotate-ccw' %} Easy returns</p>
+        <p>{% render 'icon-shield' %} Authentic Sullen artistry</p>
+      </div>
+      {%- if product.description != blank -%}
+        <details class="pdp__accordion" open>
+          <summary>Description</summary>
+          <div class="rte">{{ product.description }}</div>
+        </details>
+      {%- endif -%}
+      {%- if product.metafields.sullen.materials != blank -%}
+        <details class="pdp__accordion">
+          <summary>Materials & Care</summary>
+          <div class="rte">{{ product.metafields.sullen.materials }}</div>
+        </details>
+      {%- endif -%}
+    </div>
+  </div>
+  {% render 'sticky-add-to-cart', product: product %}
+</section>
+{% schema %}{"name":"Product info","settings":[]}{% endschema %}

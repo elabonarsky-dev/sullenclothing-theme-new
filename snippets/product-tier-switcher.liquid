@@ -1,0 +1,12 @@
+{%- assign tier_siblings = product.metafields.sullen.tier_siblings.value -%}
+{%- if tier_siblings != blank -%}
+  <div class="pdp__tier-switcher">
+    <span class="pdp__tier-label">Style:</span>
+    <div class="pdp__tier-options">
+      {%- for sibling in tier_siblings -%}
+        {%- assign sibling_tier_label = sibling.metafields.sullen.tier | default: sibling.metafields.sullen.tier_label | default: sibling.title -%}
+        <a href="{{ sibling.url }}" class="pdp__tier{% if sibling.id == product.id %} is-active{% endif %}">{{ sibling_tier_label }}</a>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

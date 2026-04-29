@@ -1,0 +1,8 @@
+<div class="bundle-picker" data-bundle-picker>
+  <span class="bundle-picker__label">Quick add</span>
+  <div class="bundle-picker__sizes">
+    {%- for variant in product.variants limit: 8 -%}
+      <button type="button" class="bundle-picker__size" data-bundle-add="{{ variant.id }}" {% unless variant.available %}disabled{% endunless %}>{{ variant.title | split: ' / ' | last }}</button>
+    {%- endfor -%}
+  </div>
+</div>

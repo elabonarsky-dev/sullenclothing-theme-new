@@ -1,0 +1,24 @@
+<product-gallery class="product-gallery">
+  <div class="product-gallery__stage" data-gallery-stage>
+    {%- for media in product.media -%}
+      <div class="product-gallery__item" data-gallery-item="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+        {%- if media.media_type == 'video' -%}
+          <video controls muted playsinline poster="{{ media.preview_image | image_url: width: 1200 }}">
+            {%- for src in media.sources -%}<source src="{{ src.url }}" type="{{ src.mime_type }}">{%- endfor -%}
+          </video>
+        {%- else -%}
+          {% render 'responsive-image', image: media, sizes: '(min-width: 750px) 50vw, 100vw', loading: 'eager' %}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if product.media.size > 1 -%}
+    <div class="product-gallery__thumbs" data-gallery-thumbs>
+      {%- for media in product.media -%}
+        <button type="button" class="product-gallery__thumb" data-gallery-thumb="{{ forloop.index0 }}" aria-label="View image {{ forloop.index }}">
+          <img src="{{ media.preview_image | image_url: width: 160 }}" alt="" width="80" height="80" loading="lazy">
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</product-gallery>

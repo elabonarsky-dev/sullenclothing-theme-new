@@ -1,0 +1,11 @@
+{%- if product.metafields.sullen.is_capsule -%}<span class="badge badge--capsule">Capsule</span>{%- endif -%}
+{%- if product.metafields.sullen.is_vault_exclusive -%}<span class="badge badge--vault">Vault</span>{%- endif -%}
+{%- if product.metafields.sullen.is_artist_series -%}<span class="badge badge--artist">Artist Series</span>{%- endif -%}
+{%- assign cmp = product.compare_at_price -%}
+{%- if cmp > product.price -%}
+  {%- assign pct = product.price | times: 100.0 | divided_by: cmp -%}
+  {%- assign discount = 100 | minus: pct | round -%}
+  {%- assign rounded = discount | divided_by: 5 | times: 5 -%}
+  <span class="badge badge--sale">-{{ rounded }}%</span>
+{%- endif -%}
+{%- unless product.available -%}<span class="badge badge--soldout">Sold out</span>{%- endunless -%}

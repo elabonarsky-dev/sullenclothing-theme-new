@@ -1,0 +1,52 @@
+[
+  {"name":"theme_info","theme_name":"Sullen OS 2.0","theme_version":"1.0.0","theme_author":"Sullen Clothing","theme_documentation_url":"https://sullenclothing.com","theme_support_url":"https://sullenclothing.com/support"},
+  {"name":"Brand","settings":[
+    {"type":"image_picker","id":"logo","label":"Logo"},
+    {"type":"image_picker","id":"logo_light","label":"Logo (light variant)"},
+    {"type":"image_picker","id":"favicon","label":"Favicon"},
+    {"type":"text","id":"social_handle","label":"Instagram handle","default":"sullenclothing"}
+  ]},
+  {"name":"Theme Mode","settings":[
+    {"type":"select","id":"theme_mode","label":"Active mode","default":"dark","options":[
+      {"value":"dark","label":"Dark (default)"},
+      {"value":"light","label":"Light"},
+      {"value":"halloween","label":"Halloween"},
+      {"value":"blaq-friday","label":"Blaq Friday"}
+    ]}
+  ]},
+  {"name":"Color Tokens (HSL)","settings":[
+    {"type":"header","content":"Dark Mode"},
+    {"type":"text","id":"dark_bg","label":"Background","default":"0 0% 4%"},
+    {"type":"text","id":"dark_fg","label":"Foreground","default":"45 38% 88%"},
+    {"type":"text","id":"dark_primary","label":"Primary (gold)","default":"45 56% 52%"},
+    {"type":"text","id":"dark_muted","label":"Muted","default":"0 0% 12%"},
+    {"type":"text","id":"dark_border","label":"Border","default":"0 0% 18%"},
+    {"type":"header","content":"Light Mode"},
+    {"type":"text","id":"light_bg","label":"Background","default":"40 20% 96%"},
+    {"type":"text","id":"light_fg","label":"Foreground","default":"0 0% 8%"},
+    {"type":"text","id":"light_primary","label":"Primary","default":"35 60% 35%"},
+    {"type":"header","content":"Halloween"},
+    {"type":"text","id":"hw_bg","label":"Background","default":"24 30% 4%"},
+    {"type":"text","id":"hw_primary","label":"Pumpkin","default":"24 95% 53%"},
+    {"type":"header","content":"Blaq Friday"},
+    {"type":"text","id":"bf_bg","label":"Background","default":"0 0% 0%"},
+    {"type":"text","id":"bf_primary","label":"Hot pink","default":"330 100% 50%"}
+  ]},
+  {"name":"Typography","settings":[
+    {"type":"text","id":"font_display","label":"Display font","default":"Hudson NY Serif"},
+    {"type":"text","id":"font_heading","label":"Heading font","default":"Oswald"},
+    {"type":"text","id":"font_body","label":"Body font","default":"Barlow"},
+    {"type":"url","id":"font_hudson_url","label":"Hudson NY Serif font URL (woff2)"}
+  ]},
+  {"name":"Cart","settings":[
+    {"type":"checkbox","id":"enable_free_ship_bar","label":"Show free-shipping progress","default":true},
+    {"type":"text","id":"free_ship_threshold","label":"Free shipping threshold","default":"75"},
+    {"type":"text","id":"free_ship_currency","label":"Currency code","default":"USD"}
+  ]},
+  {"name":"Social","settings":[
+    {"type":"url","id":"social_instagram","label":"Instagram URL"},
+    {"type":"url","id":"social_facebook","label":"Facebook URL"},
+    {"type":"url","id":"social_youtube","label":"YouTube URL"},
+    {"type":"url","id":"social_tiktok","label":"TikTok URL"}
+  ]}
+]

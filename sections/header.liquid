@@ -1,0 +1,36 @@
+<sticky-header class="site-header" data-sticky>
+  <div class="container site-header__inner">
+    <button type="button" class="site-header__burger md:hidden" aria-label="Open menu" data-mobile-nav-toggle>
+      {% render 'icon-menu' %}
+    </button>
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" width="120" height="40">
+      {%- else -%}
+        <span class="site-header__wordmark">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+    <nav class="site-header__nav md:flex" aria-label="Primary">
+      {%- for link in linklists['main-menu'].links -%}
+        <div class="site-header__nav-item" data-mega-trigger="{{ link.handle }}">
+          <a href="{{ link.url }}" class="site-header__nav-link">{{ link.title }}</a>
+          {%- if link.handle == 'men' or link.handle == 'women' or link.handle == 'lifestyle' -%}
+            {% render 'mega-menu', handle: link.handle %}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </nav>
+    <div class="site-header__actions">
+      <a href="{{ routes.search_url }}" aria-label="Search">{% render 'icon-search' %}</a>
+      <a href="{{ routes.account_url }}" aria-label="Account">{% render 'icon-user' %}</a>
+      <button type="button" data-cart-toggle aria-label="Open cart">
+        {% render 'icon-bag' %}
+        <span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </button>
+    </div>
+  </div>
+  {% render 'mobile-nav' %}
+</sticky-header>
+{% schema %}
+{"name":"Header","settings":[],"presets":[{"name":"Header"}]}
+{% endschema %}

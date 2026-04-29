@@ -1,0 +1,7 @@
+{"sections":{
+  "hero":{"type":"hero-slider","blocks":{"s1":{"type":"slide","settings":{"heading":"Sullen","subheading":"Tattoo-art apparel","cta_label":"Shop new","cta_url":"/collections/new"}}},"block_order":["s1"],"settings":{"autoplay":true,"interval":7}},
+  "tabs":{"type":"tabbed-collections","blocks":{"t1":{"type":"tab","settings":{"label":"New","collection":"new"}},"t2":{"type":"tab","settings":{"label":"Tees","collection":"t-shirts"}},"t3":{"type":"tab","settings":{"label":"Headwear","collection":"headwear"}}},"block_order":["t1","t2","t3"],"settings":{"heading":"Shop"}},
+  "bundle":{"type":"featured-bundle","settings":{"eyebrow":"Bundle & Save","heading":"Buy 3 tees, get cheapest free","collection":"t-shirts","cta_label":"Build your bundle"}},
+  "marketing":{"type":"marketing-image","settings":{"heading":"The Vault","body":"24h early access. Skull Points. Exclusive drops.","cta_label":"Join","cta_url":"/pages/vault"}},
+  "social":{"type":"social-feed","settings":{"heading":"On the streets","source_collection":"t-shirts"}}
+},"order":["hero","tabs","bundle","marketing","social"]}

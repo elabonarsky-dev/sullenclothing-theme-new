@@ -1,0 +1,35 @@
+<section class="not-found container">
+  <h1 class="display">{{ section.settings.heading }}</h1>
+  <p>{{ section.settings.body }}</p>
+  <a href="{{ routes.root_url }}" class="btn btn--primary">{{ section.settings.cta_label }}</a>
+</section>
+{% schema %}
+{
+  "name": "404 page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Page not found"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "The page you\u2019re looking for doesn\u2019t exist or has been moved."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Back to home"
+    }
+  ],
+  "presets": [
+    {
+      "name": "404 page"
+    }
+  ]
+}
+{% endschema %}

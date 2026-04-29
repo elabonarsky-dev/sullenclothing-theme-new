@@ -1,0 +1,32 @@
+<section class="account container">
+  <h1 class="display">{{ 'customer.account.title' | t }}</h1>
+  <p>Welcome, {{ customer.name | default: customer.email }}</p>
+  <div class="account__grid">
+    <nav class="account__nav">
+      <a href="{{ routes.account_url }}">Overview</a>
+      <a href="{{ routes.account_addresses_url }}">{{ 'customer.account.addresses' | t }}</a>
+      <a href="{{ routes.account_logout_url }}">{{ 'customer.account.logout' | t }}</a>
+    </nav>
+    <div class="account__main">
+      <h2>{{ 'customer.account.orders' | t }}</h2>
+      {%- if customer.orders.size > 0 -%}
+        <table class="account__orders">
+          <thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+              <tr>
+                <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+                <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
+                <td>{{ order.total_price | money }}</td>
+                <td>{{ order.fulfillment_status_label }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      {%- else -%}
+        <p>No orders yet.</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{% schema %}{"name":"Account","settings":[]}{% endschema %}
